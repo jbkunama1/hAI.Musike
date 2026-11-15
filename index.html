@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>hAI.Musike | highfishAI</title>
+<style>
+:root{font-family:system-ui,sans-serif;color:#e8edf5;background:#0b1120;line-height:1.65}body{max-width:980px;margin:auto;padding:40px 20px}header,section{background:#141e31;border:1px solid #2a3851;border-radius:18px;padding:26px;margin-bottom:20px}h1{font-size:clamp(2rem,6vw,3.6rem);margin:0}h2{color:#75e3c0}a{color:#82d7ff}nav{display:flex;flex-wrap:wrap;gap:16px;margin-top:20px}code,pre{background:#080e19;border-radius:6px}code{padding:3px 6px}pre{padding:18px;overflow:auto}li{margin:8px 0}.muted{color:#acbad0}footer{padding:15px}
+</style>
+</head>
+<body>
+<header><p class="muted">highfishAI · Self-hosted Music</p><h1>hAI.Musike</h1><p>Musike als Docker-/Portainer-Stack im highfishNetwork.</p><nav><a href="https://github.com/jbkunama1/hAI.Musike">Repository &amp; README</a><a href="https://github.com/jbkunama1/hAI.Musike/actions">Buildstatus</a><a href="https://github.com/Ernani1234/musike">Musike Originalprojekt</a></nav></header>
+<main>
+<section><h2>Docker &amp; Portainer</h2><ul><li>Image: <code>ghcr.io/jbkunama1/hai.musike:latest</code></li><li>Architekturen: Linux amd64 und arm64</li><li>Externes Netzwerk: <code>highfishNetwork</code></li><li>Weboberfläche: <code>http://SERVER-IP:4180</code></li><li>Reverse-Proxy-Ziel: <code>http://hai-musike:4180</code></li><li>Persistenz: Bibliothek unter <code>/data</code>, Cache unter <code>/cache</code></li></ul><p>Diese Seite ist die Projektdokumentation, nicht die Player-Oberfläche. Öffne den Player auf deinem eigenen Server.</p></section>
+<section><h2>Schnellstart</h2><p>Ersten erfolgreichen Build und GHCR-Zugriffsrechte prüfen. Netzwerk muss bereits existieren.</p><pre><code>git clone https://github.com/jbkunama1/hAI.Musike.git
+cd hAI.Musike
+docker network inspect highfishNetwork
+docker compose up -d</code></pre><p>In Portainer alternativ die Compose-Datei aus dem Repository als Stack deployen.</p></section>
+<section><h2>Täglicher Upstream-Build</h2><p>GitHub Actions baut täglich um 03:30 UTC aus dem aktuellen Musike-Quellcode. Zeitpläne können verzögert oder bei längerer Repository-Inaktivität deaktiviert werden. Buildstatus unter Actions prüfen.</p><p>Der laufende Container wird dadurch nicht automatisch aktualisiert. Vor Updates Bibliothek exportieren; anschließend:</p><pre><code>docker compose pull
+docker compose up -d</code></pre><p>Für einen festen Stand einen Build-Tag oder Image-Digest einsetzen. Aktuelles Upstream kann ungetestete Änderungen enthalten.</p></section>
+<section><h2>Betrieb &amp; Sicherheit</h2><p>Zugriff über einen abgesicherten HTTPS-Reverse-Proxy oder ein privates VPN bereitstellen. YouTube kann Rechenzentrums-IP-Adressen blockieren. Die Region ist DE; eine deutsche Oberfläche wird dadurch nicht hinzugefügt.</p><p>Vorhandene Volumes nicht löschen. Vollständige Konfiguration, Backup und Fehlerdiagnose stehen in der README.</p></section>
+</main><footer class="muted">Musike von Ernani1234 · Deployment durch highfishAI · Nutzungsbedingungen und Rechte der Inhaltsanbieter beachten.</footer>
+</body>
+</html>

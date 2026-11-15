@@ -1,0 +1,33 @@
+services:
+  musike:
+    image: ghcr.io/jbkunama1/hai.musike:latest
+    container_name: hai-musike
+    restart: unless-stopped
+    init: true
+    ports:
+      - "${MUSIKE_PORT:-4180}:4180"
+    environment:
+      TZ: Europe/Berlin
+      HOST: 0.0.0.0
+      PORT: "4180"
+      MUSIKE_DATA_DIR: /data
+      MUSIKE_CACHE_DIR: /cache
+      MUSIKE_CACHE_MAX_MB: "2048"
+      MUSIKE_LOCATION: DE
+    volumes:
+      - musike-data:/data
+      - musike-cache:/cache
+    networks:
+      - highfishNetwork
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+volumes:
+  musike-data:
+  musike-cache:
+networks:
+  highfishNetwork:
+    external: true
+    name: highfishNetwork
